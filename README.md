@@ -185,6 +185,48 @@ dependencies:
   url_launcher: ^6.1.14
 ```
 
+## Signup flow example:
+```
+┌──────────────────────────────────────────────────────────────────────────────────────┐
+│                          SERVERPODKIT SIGNUP FLOW                                    │
+└──────────────────────────────────────────────────────────────────────────────────────┘
+
+  [Landing]      [Form Input]        [Validation]         [Backend]           [Success]
+      │               │                    │                  │                   │
+      ▼               ▼                    ▼                  ▼                   ▼
+ ┌─────────┐    ┌───────────┐      ┌─────────────┐    ┌──────────────┐    ┌──────────┐
+ │  User   │───►│   Enter   │─────►│   Client    │───►│ ServerpodKit │───►│  Email   │
+ │  Visits │    │   Details │      │ Validation  │    │     API      │    │   Sent   │
+ └─────────┘    └───────────┘      └─────────────┘    └──────────────┘    └──────────┘
+                      │                    │                  │                   │
+                 ┌────────┐           ┌────────┐        ┌──────────┐         ┌────────┐
+                 │ Email  │           │ Format │        │ Create   │         │ Verify │
+                 │Password│           │ Check  │        │ User DB  │         │ Token  │
+                 │  Name  │           │ Unique │        │ Record   │         │  Link  │
+                 └────────┘           └────────┘        └──────────┘         └────────┘
+                                           │                  │                   │
+                                           ▼                  ▼                   ▼
+                                      ┌─────────┐      ┌──────────────┐    ┌──────────┐
+                                      │  Pass   │      │   Generate   │    │  User    │
+                                      │   or    │      │    JWT       │    │  Clicks  │
+                                      │  Fail   │      │    Token     │    │  Verify  │
+                                      └─────────┘      └──────────────┘    └─────┬────┘
+                                           │                  │                   │
+                                      ┌────┴────┐            │                   ▼
+                                      │         │            │            ┌──────────────┐
+                                    FAIL      PASS           │            │   Account    │
+                                      │         │            │            │   Verified   │
+                                      ▼         └────────────┴───────────►│   Success!   │
+                                 ┌─────────┐                              └──────────────┘
+                                 │  Show   │                                      │
+                                 │ Errors  │                                      ▼
+                                 └─────────┘                              ┌──────────────┐
+                                      ▲                                   │  Dashboard   │
+                                      │                                   │   Access     │
+                                      └───────────[Retry]─────────────────└──────────────┘
+
+Legend: ─── Flow Direction    ► Action    ┌─┐ Process Box    │ Connection
+```
 ## Getting Started
 
 ### Option 1: Use ServerpodKit (Recommended)
